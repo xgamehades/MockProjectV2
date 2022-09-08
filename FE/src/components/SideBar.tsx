@@ -36,7 +36,7 @@ const items: MenuItem[] = [
   // getItem("Đơn vị vận chuyển", "/transport-companies", <LocalShippingIcon />),
 
   getItem("Quản lý sản phẩm", "sub1", <AppstoreOutlined />, [
-    getItem("Thêm sản phẩm", "staff/productsAdd"),
+    getItem("Thêm sản phẩm", "products/add"),
     getItem("Danh sách sản phẩm", "/products"),
     getItem("Danh mục sản phẩm", "/categories"),
   ]),
@@ -60,6 +60,8 @@ const items: MenuItem[] = [
     getItem("Danh sách", "/admin/employees"),
     getItem("Roles", "/admin/roles/"),
   ]),
+  getItem("Thống kê", "/statistics", <TeamOutlined />)
+  ,
   getItem("Đăng xuất", "/login", <LogoutIcon />),
 ];
 

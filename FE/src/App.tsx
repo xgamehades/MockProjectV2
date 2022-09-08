@@ -26,6 +26,7 @@ import Create from "./components/stock_transfers/create";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./app/store";
 import {setUserStore} from "./features/user/userSlice";
+import Statistics from "./pages/statistics/Statistics";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -82,18 +83,22 @@ const App: React.FC = () => {
             { path: "return/:code", element: <CreateReturnImportInvoice /> },
           ],
         },
-        {
-          path: "staff/productsAdd",
-          element: <AddProduct />,
-        },
+      
         {
           path: "/products",
-
           children: [
+            {
+              path: "/products/add",
+              element: <AddProduct />,
+            },
             { index: true, element: <ListProduct /> },
             { path: "/products/:id", element: <ProductDetails /> },
 
           ],
+        },
+        {
+          path: "/statistics",
+          element: <Statistics />,
         },
         {
           path: "/categories",

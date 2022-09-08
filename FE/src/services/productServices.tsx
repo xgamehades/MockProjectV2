@@ -1,11 +1,12 @@
 import { stringify } from "querystring";
 import React from "react";
-const baseUrl = 'http://localhost:8080/api/'
+ const baseUrl = 'http://localhost:8080/api/'
+export var token = localStorage.getItem('token')
 
-
-const getRequest = (body: object|Array<any>, method: string, token: string | null | undefined) => {
+ const getRequest = (body: object|Array<any>, method: string, token: string | null | undefined) => {
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
+  if(token)   myHeaders.append("Authorization",`Bearer ${token}`)
 
   var raw = JSON.stringify(body);
 
@@ -24,7 +25,7 @@ const getRequest = (body: object|Array<any>, method: string, token: string | nul
 }
 
 const addProduct = (data: any) => {
-  return fetch(baseUrl + "products", getRequest(data, 'post', ''))
+  return fetch(baseUrl + "products", getRequest(data, 'post', token))
 }
 
 const getProducts = (data: any) => {
@@ -69,4 +70,4 @@ export const updateProduct=(productInfo:any)=>{
 
 
 
-export { addProduct, getProducts,countProductByFilter ,getProductById ,deleteProductById,deleteVariantsById,deleteProductsById}  
+export { addProduct, getProducts,countProductByFilter ,getProductById ,deleteProductById,deleteVariantsById,deleteProductsById,getRequest,baseUrl}  
