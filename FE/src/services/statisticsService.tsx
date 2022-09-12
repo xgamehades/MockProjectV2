@@ -14,6 +14,12 @@ export const getStatisticsImport=(filter:StatisticsFilter)=>{
   
   
   }
+  export const getStatisticsInventory=(filter:StatisticsFilter)=>{
+
+    return fetch(baseUrl+"statistics/inventories",getRequest(filter, 'Post', ''))
+  
+  
+  }
   export const getInventoryById = async (id:number) => {   
     return await axios.get(`http://localhost:8080/inventories/${id}`)
 }

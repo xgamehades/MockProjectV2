@@ -1,14 +1,12 @@
 package intern.sapo.be.controller;
 
 import intern.sapo.be.dto.request.Inventory.ListIdRequest;
-import intern.sapo.be.dto.response.product.Inventory.InventoryResponse;
-import intern.sapo.be.entity.Account;
+import intern.sapo.be.dto.response.Product.Inventory.InventoryResponse;
 import intern.sapo.be.entity.Inventory;
 import intern.sapo.be.service.IInventoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 

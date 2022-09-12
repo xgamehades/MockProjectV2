@@ -29,7 +29,7 @@ import { margin } from '@mui/system';
 
 const ListProduct = () => {
     var keyWord = ''
-    const { searchKey } = useParams()
+    const { searchKey,backcode } = useParams()
     const initFilter: IProductFilter = {
         key: searchKey ? searchKey : '',
         isDelete: false,
@@ -38,6 +38,8 @@ const ListProduct = () => {
         page: 1,
         size: 7
     }
+    console.log(backcode);
+    
     const ProductCol = [
         {
             title: 'Mã sản phẩm',

@@ -1,20 +1,33 @@
 import * as Antd from "antd";
 import React, { useEffect, useState } from "react";
 import { getSuppliers } from "../../services/api";
-import { ISupplier } from "../../services/customType";
+import { ISupplier } from "../../type/allType";
+
 
 
 type Props = {
     initValue:number,
     changeSupplierId: (n: number) => void
 }
+var all:ISupplier[]=[{
+    id:-1,
+    code: 'Tất cả',
+    name: '',
+    email: '',
+    address: '',
+    phone: '',
+    isDelete:false,
+    accountId: '',
+    updateAt: '',
+    createdAt:'',
+}]
 const SelectSupplierV2 = ({ initValue,changeSupplierId }: Props) => {
 
     const [suppliers, setSuppliers] = useState<ISupplier[]>([]);
     const [supplierId, setSupplierId] = useState<number>();
     useEffect(() => {
         getSuppliers().then((r) => {
-            setSuppliers(r.data.reverse())
+            setSuppliers(all.concat(r.data))
         })
     }, [])
     const handleSelectSupplier = (key: number) => {
@@ -22,7 +35,7 @@ const SelectSupplierV2 = ({ initValue,changeSupplierId }: Props) => {
         changeSupplierId(key)
     }
     return (
-        <Antd.Form.Item label='Nhà cung cấp:' name={'supplierId'} labelCol={{ span: 24 }}  >
+        <Antd.Form.Item label='Nhà cung cấp:' name={'supplierId'} labelCol={{ span: 6 }} labelAlign={'left'} >
             <Antd.Select style={{ width: '100%', marginBottom: 10, borderRadius: 5 }} size={'large'}
                 showSearch
                 placeholder="Nhấn để chọn nhà cung cấp"
@@ -40,15 +53,13 @@ const SelectSupplierV2 = ({ initValue,changeSupplierId }: Props) => {
                 {
 
                 <>
-                    <Antd.Select.Option key={-1} value={-1}>
-                        {'Tất cả'}
-                    </Antd.Select.Option>
+                 
                     {
 
                         suppliers.map((supplier, index) => {
                             return (
                                 <Antd.Select.Option key={supplier.id} value={supplier.id}>
-
+                                       {/* <Antd.Tag color=""></Antd.Tag>  */}
                                     {supplier.code + ' | ' + supplier.name}
 
                                 </Antd.Select.Option>

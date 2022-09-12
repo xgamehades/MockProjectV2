@@ -94,6 +94,7 @@ const App: React.FC = () => {
             { index: true, element: <ListProduct /> },
             { path: "/products/:id", element: <ProductDetails /> },
 
+
           ],
         },
         {

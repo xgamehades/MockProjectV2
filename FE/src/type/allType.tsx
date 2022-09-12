@@ -1,4 +1,5 @@
 import { NullLiteral } from "typescript"
+import { number } from "yup/lib/locale"
 
 export interface Supplier {
     id: number,
@@ -123,29 +124,38 @@ export interface StatisticsFilter{
         endDate:number,
         sortBy:string,
         sortDir:boolean,
-        productName?:string,
+        keySearch:string,
         tag:number,
         page:number,
         size:number,
         type:number,
         statisticsType:number,
+        viewType:number
 
 }
-export interface StatisticsResult{
-        productId:number,
-        productVariantId:number,
-        name:string,
-        totalPrice:number,
-
+export interface StatisticsIventoryFilter{
+    inventoryId:number,
+    startDate:number,
+    endDate:number,
+    sortBy:string,
+    sortDir:boolean,
+    keySearch?:string,
+    tag:number,
+    page:number,
+    size:number,
+    type:number,
+    statisticsType:number,
+    viewType:number
 
 }
+
 export interface Inventory {
     id: number;
     code: string;
     name: string;
     address: string;
     createAt: string;
-    updateAt: null;
+    updateAt: string;
     isDelete: boolean;
   }
   export interface ImportStatistic
@@ -162,15 +172,36 @@ export interface Inventory {
     totalPrice:number,
     deliveryDate:string,
     createAt:string,
+    code:string,
     name:string,
+    productId:number,
+    productName:string,
     returnNumber:number,
-    receiveNumber:number
+    receiveNumber:number,
+    avgPrice :number
+}
+
+export interface InventoryStatistic{
+    "productVariantId": number,
+    "productVariantCode": string,
+    "productVariantName": string,
+    "productId": number,
+    "productCode": string,
+    "importNumber": number,
+    "returnNumber": number,
+    "exportNumber": number,
+    "quantity": number
 }
 
 export interface sortOption{
     key:string,
     value:string
 }
+export interface typeOption{
+    key:number,
+    value:string
+}
+
 
 export const ImportSortOptions:sortOption[]=[
     {key:'name',value:'Tên sản phẩm'},
@@ -181,3 +212,54 @@ export const ImportSortOptions:sortOption[]=[
     {key:'total_price',value:'Tổng tiền'},
     {key:'create_at',value:'Thời gian nhập'}
 ]
+
+export const ExportSortOptions:sortOption[]=[
+    {key:'name',value:'Tên sản phẩm'},
+    {key:'receive_number',value:'Số lượng nhập'},
+    {key:'return_number',value:'Số lượng trả hàng'},
+    {key:'export_number',value:'Số lượng'},
+    {key:'import_price',value:'Giá nhập'},
+    {key:'total_price',value:'Tổng tiền'},
+    {key:'create_at',value:'Thời gian xuất'}
+]
+export const InventorySortOptions:sortOption[]=[
+    {key:'product_variant_name',value:'Tên sản phẩm'},
+    {key:'product_variant_code',value:'Mã sản phẩm'},
+    {key:'quantity',value:'Số lượng tồn'},
+    {key:'import_number',value:'Số lượng nhập'},
+    {key:'return_number',value:'Số lượng trả'},
+    {key:'export_number',value:'Số lượng xuất'},
+
+]
+export const InventoryTypeOption:typeOption[]=[
+    {key:1,value:'Tất cả sản phẩm'},
+    {key:2,value:'Sản phẩm cụ thể'}
+   
+
+]
+export const TypeOptions:typeOption[]=[
+    {key:1,value:'Nhập kho'},
+    {key:2,value:'Tồn kho'},
+    {key:3,value:'Xuất kho'}
+
+   
+
+]
+export const ViewTypeOptions:typeOption[]=[
+    {key:1,value:'Gộp theo sản phẩm'},
+    {key:2,value:'Mở rộng theo phiếu nhập'}
+
+
+]
+export interface ISupplier {
+    id:number,
+    code: string;
+    name: string;
+    email: string;
+    address: string;
+    phone: string;
+    isDelete: boolean;
+    accountId: string;
+    updateAt: string;
+    createdAt: string;
+}

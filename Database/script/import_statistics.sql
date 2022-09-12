@@ -29,7 +29,7 @@ CREATE TEMPORARY TABLE p_return (
     have int
 
 		);
-        CREATE TEMPORARY TABLE p_receive (
+	CREATE TEMPORARY TABLE p_receive (
 	inventory_id int,
     supplier_id int,
     account_id int,
@@ -41,5 +41,4 @@ CREATE TEMPORARY TABLE p_return (
     total_price int ,
     delivery_date text,
     create_at datetime
-
 		);

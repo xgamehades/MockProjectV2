@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import React, { useEffect, useState, memo } from "react";
 import { ISupplier } from "../../services/customType";
 import { Button, Col, Dropdown, Menu, MenuProps, Row, Space } from "antd";
@@ -23,11 +23,13 @@ export interface ProductInfo {
 
 const ProductDetails = () => {
 
-    const { id } = useParams();
+    const { id ,backcode} = useParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [focusVariant, setFocusVariant] = useState<IVariant>()
+    searchParams.get('backcode')
+
     // const [product, setProduct] = useState<Product>()
     // const [variants, setVariants] = useState<IVariant[]>()
-
     // const [categories, setCategories] = useState<Category[]>([])
     const [isUpdate, setIsUpdate] = useState(false)
     const [productInfo, setProductInfo] = useState<ProductInfo>()
@@ -42,6 +44,7 @@ const ProductDetails = () => {
     const navigate = useNavigate()
     const loadData = () => {
         getProductById(Number(id)).then(response => {
+            if(response.ok)
             return response.json()
         }).then(data => {
             // setProduct(data.product)
@@ -107,10 +110,38 @@ const ProductDetails = () => {
     const handleMenuClick: MenuProps['onClick'] = (e: any) => {
         switch (e.key) {
             case '1':
-                handleDeleteProduct(productInfo?.product?.id)
+                if(productInfo?.product?.id)
+                {
+                    handleDeleteProduct(productInfo?.product?.id)
+
+                }
+                else
+                {
+                    ToastCustom.fire(
+                        {
+                            icon: 'warning',
+                            title: 'Sản phẩm không tồn tại trong kho ko thể xóa'
+
+                        }
+                    )
+                }
                 break
             case '2':
-                setIsUpdate(true)
+                if(productInfo?.product?.id)
+                {
+                    setIsUpdate(true)
+                }
+                else
+                {
+                    ToastCustom.fire(
+                        {
+                            icon: 'warning',
+                            title: 'Sản phẩm không tồn tại trong kho không thể sửa'
+
+                        }
+                    )
+                }
+               
                 break
         }
     };
@@ -406,6 +437,11 @@ const ProductDetails = () => {
                         <Link to="/products">
                             <LeftOutlined /> Danh sách sản phẩm
                         </Link>
+                        {
+                            (searchParams.get('backcode')?.toString()=='statistic')? <Link to="/statistics">
+                            <LeftOutlined /> Thống kê
+                        </Link>:null
+                        }
                     </h2>
                     <h1 style={{fontSize:'30px',margin:0,marginRight:10,marginBottom:'45px'}}>Chi tiết sản phẩm</h1>
 
@@ -453,7 +489,7 @@ const ProductDetails = () => {
                     </Mui.Grid>
                     <Mui.Grid item xs={4}>
 
-                        <VariantDetails variant={focusVariant} />
+                       {focusVariant? <VariantDetails variant={focusVariant} />:null}
                     </Mui.Grid>
 
 
@@ -469,7 +505,7 @@ const ProductDetails = () => {
                 <textarea style={{width:'100%',height:'500px',padding:10}} disabled={true}>{productInfo?.product.description}</textarea>
             </Antd.Modal>
            
-            {isUpdate ? <UpdateProduct
+            {(isUpdate  && productInfo?.product)? <UpdateProduct
                 product={productInfo?.product} variants={productInfo?.variants} categories={productInfo?.categories} setIsUpdate={setActionUpdate}></UpdateProduct>
                 : <View></View>}
         </div>

@@ -10,7 +10,7 @@ import type { MenuProps } from "antd/es/menu";
 import { useNavigate } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 // import AddProduct from "../pages/product/AddProduct";
-
+import {Link} from 'react-router-dom'
 import "../styles/SideBar.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
@@ -36,8 +36,8 @@ const items: MenuItem[] = [
   // getItem("Đơn vị vận chuyển", "/transport-companies", <LocalShippingIcon />),
 
   getItem("Quản lý sản phẩm", "sub1", <AppstoreOutlined />, [
-    getItem("Thêm sản phẩm", "products/add"),
-    getItem("Danh sách sản phẩm", "/products"),
+    getItem(<Link to='/products/add'>Thêm sản phẩm</Link>, "products/add"),
+    getItem(<Link to='/products'>Danh sách sản phẩm</Link>, "/products"),
     getItem("Danh mục sản phẩm", "/categories"),
   ]),
   getItem("Hàng hoá", "sub2", <AppstoreOutlined />, [
@@ -60,7 +60,7 @@ const items: MenuItem[] = [
     getItem("Danh sách", "/admin/employees"),
     getItem("Roles", "/admin/roles/"),
   ]),
-  getItem("Thống kê", "/statistics", <TeamOutlined />)
+  getItem(<Link to='/statistics'>Thống kê</Link>, "/statistics", <TeamOutlined />)
   ,
   getItem("Đăng xuất", "/login", <LogoutIcon />),
 ];
@@ -95,6 +95,7 @@ const SideBar: React.FC = () => {
           onClick={(e) => {
             navigate(e.key, {replace: true})
           }}
+          
         />
       </div>
       {/* </div> */}

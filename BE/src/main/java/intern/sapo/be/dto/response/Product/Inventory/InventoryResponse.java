@@ -1,4 +1,4 @@
-package intern.sapo.be.dto.response.product.Inventory;
+package intern.sapo.be.dto.response.Product.Inventory;
 
 import intern.sapo.be.dto.request.ProductVariantsDTO;
 import intern.sapo.be.entity.Inventory;
