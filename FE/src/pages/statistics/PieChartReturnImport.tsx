@@ -60,17 +60,24 @@ const PieChartReturnImport = (props: Props) => {
     var tong = 0
     var hoanTra = 0
     var nhapKho = 0
-    stokes.forEach((item, index) => {
-      tong = tong + item.importNumber
-      hoanTra = hoanTra + item.returnNumber
-      nhapKho = nhapKho + item.quantity
-    })
+    if(stokes)
+    {
+      stokes.forEach((item, index) => {
+        tong = tong + item.importNumber
+        hoanTra = hoanTra + item.returnNumber
+        nhapKho = nhapKho + item.quantity
+      })
+   
+      
+    }
     return [
       { name: 'Hoàn trả', value: hoanTra },
       { name: 'Tồn', value: nhapKho }
 
 
     ]
+ 
+   
   }
   
   var data = getData(imports)
@@ -122,7 +129,7 @@ const PieChartReturnImport = (props: Props) => {
    :  
    <Col span={12} style={{ height: 200, padding: 20 }}>
    {
-      stokes.length > 0 ?
+      stokes?.length > 0 ?
        <ResponsiveContainer width="100%" height="100%">
 
          <PieChart {...props}>

@@ -569,7 +569,7 @@ const Statistics: FC = () => {
                                 </Grid>
                                 <Grid item xs={8}>
                                     <Paper style={{ borderRadius: 5, height: 620, width: '100%', padding: 20 }}>
-                                        {stokes.length > 0 ? <BarChartStatisticInventory inventoryStatistic={stokes}></BarChartStatisticInventory> :
+                                        {stokes?.length > 0 ? <BarChartStatisticInventory inventoryStatistic={stokes}></BarChartStatisticInventory> :
                                             <div style={{ display: 'flex', justifyContent: 'center' }}>
 
                                                 <Antd.Image
