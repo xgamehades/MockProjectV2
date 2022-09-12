@@ -26,7 +26,7 @@ import Create from "./components/stock_transfers/create";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./app/store";
 import {setUserStore} from "./features/user/userSlice";
-import Statistics from "./pages/statistics/Statistics";
+import Staitistics from './pages/statistics/Statistics'
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -99,7 +99,7 @@ const App: React.FC = () => {
         },
         {
           path: "/statistics",
-          element: <Statistics />,
+          element: <Staitistics />,
         },
         {
           path: "/categories",
