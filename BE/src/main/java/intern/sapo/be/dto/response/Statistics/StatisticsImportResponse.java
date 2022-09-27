@@ -27,7 +27,7 @@ public class StatisticsImportResponse {
     private String code;
     private String name;
     private Integer productId;
-    private String productName;
+    private String productCode;
     private Integer returnNumber;
     private Integer receiveNumber;
 

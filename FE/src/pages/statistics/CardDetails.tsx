@@ -72,8 +72,9 @@ const CardDetails = (props: Props) => {
             default:
                 break;
         }
-
+            
         return title
+
     }
     return (
         <Paper style={{ height: '100%', width: '100%', padding: 20 }}>
@@ -161,7 +162,7 @@ const CardDetails = (props: Props) => {
                                 <b> {supplier?.name}
                                 </b>
                                 <Tag color='green' onClick={() => { navigate(`/supplier/details/${supplier?.id}`) }}>
-                                    <Link to={`/supplier/details/${supplier?.code}`}>{supplier?.code}</Link>
+                                    <Link to={`/supplier/details/${supplier?.id}`}>{supplier?.code}</Link>
                                 </Tag>
                             </p>
                                 :

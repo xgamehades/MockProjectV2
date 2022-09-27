@@ -1,37 +1,42 @@
 import { Select, Tag } from "antd"
 import Table, { ColumnProps } from "antd/lib/table"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { ImportStatistic, sortOption } from "../../type/allType"
 
 interface Props {
     imports: ImportStatistic[],
-    onChange?: Function|undefined
+    onChange?: Function | undefined
 }
 
 const ImportStatisticExtend = (props: Props) => {
     const { imports, onChange } = { ...props }
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const extendImportCol: ColumnProps<ImportStatistic>[] = [
         {
             title: 'STT',
             dataIndex: 'importCode',
             key: 'importCode',
-          
-    
-            render: (importCode: string,record :ImportStatistic,index:number) => {
+
+
+            render: (importCode: string, record: ImportStatistic, index: number) => {
                 return (
-                    <p>  {index+1}</p>
-               ) }
+                    <p>  {index + 1}</p>
+                )
+            }
         },
         {
             title: 'Mã Phiếu nhập',
             dataIndex: 'importCode',
             key: 'importCode',
             width: '8%',
-    
-            render: (importCode: string) => {
+
+            render: (importCode: string, record: ImportStatistic) => {
                 return (
-                    <Tag color="green" onClick={() => { navigate(`/purchase_orders/details/PON00130`) }}  >{importCode}</Tag>
+                    <Tag color="green" onClick={() => { navigate(`/purchase_orders/details/${record.importCode}`) }}  >
+
+                        <Link to={`/purchase_orders/details/${record.importCode}`}>  {importCode}
+                        </Link>
+                    </Tag>
                 )
             }
         },
@@ -39,10 +44,12 @@ const ImportStatisticExtend = (props: Props) => {
             title: 'Mã SP',
             dataIndex: 'code',
             key: 'code',
-    
-            render: (data: string,record:ImportStatistic) => {
+
+            render: (data: string, record: ImportStatistic) => {
                 return (
-                    <Tag color="orange" onClick={() => { navigate(`/products/${record.productVariantId}`) }}  >{data}</Tag>
+                    <Tag color="orange" onClick={() => { navigate(`/products/${record.productId}`) }}  >
+                        <Link to={`/products/${record.productId}`}>{data}</Link>
+                    </Tag>
                 )
             }
         },
@@ -60,7 +67,7 @@ const ImportStatisticExtend = (props: Props) => {
             render: (data: number) => {
                 return (
                     data > 0 ? data : '---'
-    
+
                 )
             }
         },
@@ -73,12 +80,12 @@ const ImportStatisticExtend = (props: Props) => {
             render: (data: number) => {
                 return (
                     data > 0 ? data : '---'
-    
+
                 )
             }
-    
+
         },
-    
+
         {
             title: "Nhập kho",
             dataIndex: "receiveNumber",
@@ -90,7 +97,7 @@ const ImportStatisticExtend = (props: Props) => {
                     data > 0 ? data : '---'
                 )
             }
-    
+
         }
         ,
         {
@@ -98,7 +105,7 @@ const ImportStatisticExtend = (props: Props) => {
             dataIndex: "importPrice",
             key: "importPrice",
             width: '12%',
-    
+
             render: (importPrice: number) => {
                 return (
                     importPrice ?
@@ -111,7 +118,7 @@ const ImportStatisticExtend = (props: Props) => {
             dataIndex: "totalPrice",
             key: "totalPrice",
             width: '12%',
-    
+
             render: (totalPrice: number) => {
                 return (
                     totalPrice ?
@@ -119,13 +126,13 @@ const ImportStatisticExtend = (props: Props) => {
                 )
             }
         },
-    
+
         {
             title: "Ngày giao dự kiến",
             dataIndex: "deliveryDate",
             key: "deliveryDate",
             width: '12%',
-    
+
             // render: (deliveryDate:string)=>
             //     {
             //     return (
@@ -134,22 +141,22 @@ const ImportStatisticExtend = (props: Props) => {
             //     )
             // }
         },
-    
+
         {
             title: "Thời điểm nhập",
             dataIndex: "createAt",
             key: "createAt",
             width: '12%',
-    
+
             render: (data: string) => {
                 const moment = require('moment');
                 const d = new Date(data);
                 return <div>{moment(d, ["hh:mm A"]).format('DD-MM-YYYY HH:mm:ss')}</div>;
             }
         },
-    
+
     ]
-    
+
     return (
 
 

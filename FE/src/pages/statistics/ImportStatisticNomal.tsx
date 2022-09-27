@@ -1,6 +1,6 @@
 import { Select, Table, Tag } from "antd"
 import { ColumnProps } from "antd/lib/table"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { ImportStatistic } from "../../type/allType"
 
 interface Props {
@@ -31,7 +31,11 @@ const ImportStatisticNomal = (props: Props) => {
     
             render: (data: string,record:ImportStatistic) => {
                 return (
-                    <Tag color="green" onClick={() => { navigate(`/products/${record.productId}?backcode=statistic`) }}  >{data}</Tag>
+                    <Tag color="green" onClick={() => { navigate(`/products/${record.productId}?backcode=statistic`) }}  >
+                        <Link to={`/products/${record.productId}?backcode=statistic`}> {data}</Link>
+                    
+                    
+                    </Tag>
                 )
             }
         },
